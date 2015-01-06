@@ -17,13 +17,15 @@ public class OneCellMultiplication extends Thread {
 
     @Override
     public void run() {
-        multiply();
+        synchronized (this) {
+            multiply();
+        }
         notify();
     }
 
     public void multiply() {
 
-        for(int i=0; i < row.length; i++) {
+        for (int i = 0; i < row.length; i++) {
             result += row[i] * col[i];
         }
     }

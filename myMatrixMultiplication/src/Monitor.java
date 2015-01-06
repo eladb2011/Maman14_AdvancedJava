@@ -18,6 +18,7 @@ public class Monitor {
     public void run() {
         initializeThreadsArray();
         startAllThreadsInThreadsArray();
+
 //        resMat = getResultFromMonitor();
 //        printResultMatrix();
     }
@@ -25,23 +26,34 @@ public class Monitor {
     private void initializeThreadsArray() {
         int arraySize = m1.getRows() * m2.getCols();
         threadsArray = new OneCellMultiplication[arraySize];
+        int length = threadsArray.length / m1.getRows();
 
-        for(int i=0; i < threadsArray.length; i++) {
-            threadsArray[i] = new OneCellMultiplication(getRowVector(i), getColVector(i));
+        for (int i = 0; i < length; i++) {
+            threadsArray[i] = new OneCellMultiplication(m1.getRow(i), m2.getCol(i));
+
+            if(length == m1.getRows()) {
+                length = 0;
+            }
         }
     }
 
     private void startAllThreadsInThreadsArray() {
-        for(int i=0; i < threadsArray.length; i++) {
+        for (int i = 0; i < threadsArray.length; i++) {
             threadsArray[i].start();
         }
     }
 
-    private int[] getColVector(int i) {
-        return new int[0];
+    private int[] getColVector(int i, int colSize) {
+        int[] res = new int[colSize];
+
+
+        return res;
     }
 
-    private int[] getRowVector(int i) {
-        return new int[0];
+    private int[] getRowVector(int i, int rowSize) {
+        int[] res = new int[rowSize];
+
+
+        return res;
     }
 }
